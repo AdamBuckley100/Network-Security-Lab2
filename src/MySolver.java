@@ -42,11 +42,11 @@ public class MySolver
 					if (word_encrypted.equals(salt + stored_password)) // salt + stored_password is just full salted + encrypted password.
 					{
 						foundADictWordThatMatchedForThisPass = true;
-						System.out.println("The dictinary word for " + salted_password + " is " + word); // salted_password is full pass
+						System.out.println("The dictinary word (aka actual password) for " + salted_password + " is: => " + word); // salted_password is full pass
 					}
 				}
-				System.out.println("Now within passwors while loop for: " + password + "whos salt is " + salt + " and pass part is " + stored_password);
-				System.out.println("no of times iterated for " + salted_password + " is " + noTimeIterated);
+				System.out.println(salted_password + "'s salt is " + salt);
+				System.out.println("No. of iterations that were required to find " + salted_password + "'s dictionary word (password) was " + noTimeIterated);
 				dict_br.close();
 			}
 			System.out.println("Done: Now closing");
