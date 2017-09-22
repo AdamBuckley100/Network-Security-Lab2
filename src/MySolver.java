@@ -4,17 +4,15 @@ public class MySolver
 {
 	public static void main(String args[])
 	{
-
 		try
 		{
 			BufferedReader myPasswords = new BufferedReader(new InputStreamReader(new FileInputStream("ab_passwd")));
 
 			String password;
 
-			BufferedReader dict_br = new BufferedReader(new InputStreamReader(new FileInputStream("dictionary")));
-
 			while ( (password = myPasswords.readLine() ) != null)  
 			{
+				BufferedReader dict_br = new BufferedReader(new InputStreamReader(new FileInputStream("dictionary")));
 				//Now looking at 1 passwords and every dict word
 
 				//now compare this one FULL (encrypted and salted) password (password) with all dict words
@@ -32,9 +30,12 @@ public class MySolver
 				String word_encrypted; // this will be what is given back from JCrypt's equals method. (which will be A full password).
 
 				boolean foundADictWordThatMatchedForThisPass = false;
+				
+				int noTimeIterated = 0;
 
-				while ( (word = dict_br.readLine() ) != null && foundADictWordThatMatchedForThisPass == false)   
+				while ( (word = dict_br.readLine() ) != null && foundADictWordThatMatchedForThisPass == false )   
 				{
+					noTimeIterated++;
 					word_encrypted = JCrypt.crypt(salt, word); // word is just dict. word, salt is first 2 chars of FULL password we're looking at. A full pass is handed back.
 
 					// Print the content on the console
@@ -44,9 +45,12 @@ public class MySolver
 						System.out.println("The dictinary word for " + salted_password + " is " + word); // salted_password is full pass
 					}
 				}
+				System.out.println("Now within passwors while loop for: " + password + "whos salt is " + salt + " and pass part is " + stored_password);
+				System.out.println("no of times iterated for " + salted_password + " is " + noTimeIterated);
+				dict_br.close();
 			}
+			System.out.println("Done: Now closing");
 			myPasswords.close();
-			dict_br.close();
 		}
 		catch (Exception e)
 		{
