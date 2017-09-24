@@ -1,7 +1,6 @@
 import java.io.*;
 
 /**
- * 
  * @author Adam Buckley
  * references: JCrypt class author Eric Young and Solver.java class author Jimmy McGibney
  *
